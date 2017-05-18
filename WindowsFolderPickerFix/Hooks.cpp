@@ -1,5 +1,6 @@
 #include "Hooks.h"
-#include "Tools.h"
+#include <string>
+#include "Utilities.h"
 
 #pragma warning(disable: 4996)
 
@@ -201,8 +202,26 @@ PIDLIST_ABSOLUTE ShowDialog(LPBROWSEINFOW lpbiw, LPBROWSEINFOA lpbia)
 	UINT ulFlags = (lpbiw != NULL) ? lpbiw->ulFlags : lpbia->ulFlags;
 	LPCITEMIDLIST pidlroot = (lpbiw != NULL) ? lpbiw->pidlRoot : lpbia->pidlRoot;
 
-	if (lpfn != NULL || pidlroot != NULL || (ulFlags & ~CompatibleFlags) != 0)
+	if (lpfn != NULL)
 	{
+		ShowDebugMessage(L"Using old dialog", L"SHBrowseForFolder was called with a non-null callback function lpfn. This is unsupported so the old dialog will be shown.");
+		return ShowOldDialog(lpbiw, lpbia);
+	}else if(pidlroot != NULL)
+	{
+		ShowDebugMessage(L"Using old dialog", L"SHBrowseForFolder was called with a non-null root folder value pidlRoot. This is unsupported so the old dialog will be shown.");
+		return ShowOldDialog(lpbiw, lpbia);
+	}else if((ulFlags & ~CompatibleFlags) != 0)
+	{
+#if _DEBUG
+		UINT incompatibleFlags = (ulFlags & ~CompatibleFlags);
+		std::vector<std::wstring> flagLabels = BIFFlagsToWString(incompatibleFlags);
+		std::wstring msg = L"SHBrowseForFolder was called with incompatible flags so the old dialog will be shown.\nIncompatible flags: ";
+		for(unsigned int i = 0; i < flagLabels.size(); i++)
+		{
+			msg += flagLabels[i] + L", ";
+		}
+		ShowDebugMessage(L"Using old dialog", msg.c_str());
+#endif
 		return ShowOldDialog(lpbiw, lpbia);
 	}
 	return ShowModernDialog(lpbiw, lpbia);
