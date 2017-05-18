@@ -6,7 +6,7 @@
 SHBrowseForFolderW_Func SHBrowseForFolderW_Original = NULL;
 SHBrowseForFolderA_Func SHBrowseForFolderA_Original = NULL;
 
-int EnableHook()
+int CreateHook()
 {
 	// Initialize MinHook.
 	if (MH_Initialize() != MH_OK)
@@ -26,6 +26,11 @@ int EnableHook()
 		return 1;
 	}
 
+	return 0;
+}
+
+int EnableHook()
+{
 	// Enable the hook for SHBrowseForFolderW.
 	if (MH_EnableHook(&SHBrowseForFolderW) != MH_OK)
 	{
@@ -69,10 +74,13 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+		CreateHook();
 		EnableHook();
 		break;
 	case DLL_THREAD_ATTACH:
+		break;
 	case DLL_THREAD_DETACH:
+		break;
 	case DLL_PROCESS_DETACH:
 		DisableHook();
 		break;
