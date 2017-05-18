@@ -1,4 +1,4 @@
-# WindowsFolderPickerFix
+# WindowsFolderPickerFix - [Download](https://github.com/Waterflames/WindowsFolderPickerFix/releases)
 Do you recognize this folder selection dialog?
 
 ![Old dialog](https://i.imgur.com/iG3VVrK.png)
