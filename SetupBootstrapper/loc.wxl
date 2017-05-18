@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) Microsoft Corporation.  All rights reserved.
+    
+    The use and distribution terms for this software are covered by the
+    Common Public License 1.0 (http://opensource.org/licenses/cpl1.0.php)
+    which can be found in the file CPL.TXT at the root of this distribution.
+    By using this software in any fashion, you are agreeing to be bound by
+    the terms of this license.
+    
+    You must not remove this notice, or any other, from this software.
+-->
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="Caption">[WixBundleName] Setup</String>
+  <String Id="Title">[WixBundleName]</String>
+  <String Id="ConfirmCancelMessage">Are you sure you want to cancel?</String>
+  <String Id="InstallLicenseLinkText">[WixBundleName] &lt;a href="#"&gt;license terms&lt;/a&gt;.</String>
+  <String Id="InstallAcceptCheckbox">I &amp;agree to the license terms and conditions</String>
+  <String Id="InstallOptionsButton">&amp;Options</String>
+  <String Id="InstallInstallButton">&amp;Install</String>
+  <String Id="InstallCloseButton">&amp;Close</String>
+  <String Id="OptionsHeader">Setup Options</String>
+  <String Id="OptionsLocationLabel">Install location:</String>
+  <String Id="OptionsBrowseButton">&amp;Browse</String>
+  <String Id="OptionsOkButton">&amp;OK</String>
+  <String Id="OptionsCancelButton">&amp;Cancel</String>
+  <String Id="ProgressHeader">Setup Progress</String>
+  <String Id="ProgressLabel">Processing:</String>
+  <String Id="OverallProgressPackageText">[ProgressPackageName]</String>
+  <String Id="ProgressCancelButton">&amp;Cancel</String>
+  <String Id="ModifyHeader">Modify Setup</String>
+  <String Id="ModifyRepairButton">&amp;Repair</String>
+  <String Id="ModifyUninstallButton">&amp;Uninstall</String>
+  <String Id="ModifyCloseButton">&amp;Close</String>
+  <String Id="SuccessHeader">Setup Successful</String>
+  <String Id="SuccessLaunchButton">&amp;Launch</String>
+  <String Id="SuccessRestartText">You must restart your computer before you can use the software.</String>
+  <String Id="SuccessRestartButton">&amp;Restart</String>
+  <String Id="SuccessCloseButton">&amp;Close</String>
+  <String Id="FailureHeader">Setup Failed</String>
+  <String Id="FailureHyperlinkLogText">One or more issues caused the setup to fail. Please fix the issues and then retry setup. For more information see the &lt;a href="#"&gt;log file&lt;/a&gt;.</String>
+  <String Id="FailureRestartText">You must restart your computer to complete the rollback of the software.</String>
+  <String Id="FailureRestartButton">&amp;Restart</String>
+  <String Id="FailureCloseButton">&amp;Close</String>
+  
+  <String Id="InstallHeader">Welcome</String>
+  <String Id="InstallMessage">Setup will install [WixBundleName] on your computer to [CommonAppDataFolder]WindowsFolderPickerFix. Click install to continue or Close to exit.</String>
+  <String Id="InstallVersion">Version [WixBundleVersion]</String>
+</WixLocalization>

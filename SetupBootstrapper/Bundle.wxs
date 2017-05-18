@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="Windows Folder Picker Fix" Version="1.0.0.0" Manufacturer="Waterflames" UpgradeCode="3d15fcfc-83f9-42b3-bf30-23ee585a8526">
+	  <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseUrl=""
+	      ThemeFile="theme.xml"
+        LocalizationFile="loc.wxl"
+	    />
+	  </BootstrapperApplicationRef>
+
+		<Chain>
+			<MsiPackage SourceFile="..\Setup\bin\Release\Setup.msi" />
+		</Chain>
+	</Bundle>
+</Wix>

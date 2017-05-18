@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Windows Folder Picker Fix" Language="1033" Version="1.0.0.0" Manufacturer="Waterflames" UpgradeCode="00e6bcd4-f444-4836-84a6-5380001e1c1e">
+	  <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+	  <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+	  <MediaTemplate />
+
+	  <Feature Id="Main" Title="Windows Folder Picker Fix" Level="1">
+	    <ComponentGroupRef Id="Libraries" />
+	  </Feature>
+  
+	  <Binary Id="RegistryModifier.CA.dll" SourceFile="..\RegistryModifier\bin\$(var.Configuration)\RegistryModifier.CA.dll" />
+  
+	  <CustomAction Id="InstallDLLHook" Return="check" Execute="deferred" BinaryKey="RegistryModifier.CA.dll" DllEntry="InstallDLLHook" Impersonate="no"/>
+	  <CustomAction Id="RemoveDLLHook" Return="check" Execute="deferred" BinaryKey="RegistryModifier.CA.dll" DllEntry="RemoveDLLHook" Impersonate="no"/>
+    
+    <InstallExecuteSequence>
+      <Custom Action="InstallDLLHook" After="InstallFiles">NOT Installed AND NOT REMOVE</Custom>
+      <Custom Action='RemoveDLLHook' After='RemoveFiles'>(NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL")</Custom>
+    </InstallExecuteSequence>
+	</Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="INSTALLFOLDER" Name="WindowsFolderPickerFix" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Libraries" Directory="INSTALLFOLDER">
+      <Component Id="x86.dll" Guid="6B61AF55-123A-4FE0-8C37-5BED375C7651">
+        <File Id="x86.dll" Source="..\Release\x86.dll" KeyPath="yes" Checksum="yes">
+          <!--<Permission GenericExecute="yes" Write="no" Append="no" GenericWrite="no" Delete="yes" User="[WIX_ACCOUNT_USERS]"/>
+          <Permission GenericAll="yes" Delete="yes" User="[WIX_ACCOUNT_ADMINISTRATORS]"/>-->
+        </File>
+      </Component>
+      <Component Id="x64.dll" Guid="AB76AF26-1931-426A-97CE-F0BE69A63977">
+        <File Id="x64.dll" Source="..\x64\Release\x64.dll" KeyPath="yes" Checksum="yes">
+          <!--<Permission GenericExecute="yes" Write="no" Append="no" GenericWrite="no" Delete="yes" User="[WIX_ACCOUNT_USERS]"/>
+          <Permission GenericAll="yes" Delete="yes" User="[WIX_ACCOUNT_ADMINISTRATORS]"/>-->
+        </File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
